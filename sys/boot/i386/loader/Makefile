@@ -48,6 +48,13 @@ LIBFICL=	${.OBJDIR}/../../ficl/libficl.a
 .endif
 .endif
 
+#Lua
+.if ${MK_LUA} != "no"
+BOOT_LUA=	yes
+CFLAGS+=	-DBOOT_LUA -I${.CURDIR}/../../../lua/src
+LIBLUA=	${.OBJDIR}/../../lua/liblua.a
+.endif
+
 .if defined(LOADER_BZIP2_SUPPORT)
 CFLAGS+=	-DLOADER_BZIP2_SUPPORT
 .endif
@@ -121,11 +128,21 @@ FILES+= menu.rc
 .endif
 .endif
 
+.if ${MK_LUA} != "no"
+.PATH: ${.CURDIR}/../../lua
+FILES+= config.lua core.lua drawer.lua
+FILES+= menu.lua password.lua screen.lua
+
+.if !exists(${DESTDIR}/boot/loader.lua)
+FILES+= loader.lua
+.endif
+.endif
+
 # XXX crt0.o needs to be first for pxeboot(8) to work
 OBJS=	${BTXCRT}
 
-DPADD=	${LIBFICL} ${LIBFIREWIRE} ${LIBZFSBOOT} ${LIBI386} ${LIBSTAND}
-LDADD=	${LIBFICL} ${LIBFIREWIRE} ${LIBZFSBOOT} ${LIBI386} ${LIBSTAND}
+DPADD=	${LIBFICL} ${LIBLUA} ${LIBFIREWIRE} ${LIBZFSBOOT} ${LIBI386} ${LIBSTAND}
+LDADD=	${LIBFICL} ${LIBLUA} ${LIBFIREWIRE} ${LIBZFSBOOT} ${LIBI386} ${LIBSTAND}}
 
 .include <bsd.prog.mk>
 

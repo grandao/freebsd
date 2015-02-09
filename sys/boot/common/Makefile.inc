@@ -2,6 +2,7 @@
 
 SRCS+=	boot.c commands.c console.c devopen.c interp.c 
 SRCS+=	interp_backslash.c interp_parse.c ls.c misc.c 
+SRCS+=	interp_simple.c 
 SRCS+=	module.c panic.c
 
 .if ${MACHINE} == "i386" || ${MACHINE_CPUARCH} == "amd64"
@@ -66,6 +67,10 @@ MAN+=	../forth/loader.4th.8
 MAN+=	../forth/menu.4th.8
 MAN+=	../forth/menusets.4th.8
 MAN+=	../forth/version.4th.8
+.endif
+
+.if defined(BOOT_LUA)
+SRCS+=	interp_lua.c
 .endif
 
 .if defined(BOOT_PROMPT_123)

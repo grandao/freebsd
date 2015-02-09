@@ -8,6 +8,10 @@
 SUBDIR+=		ficl
 .endif
 
+.if ${MK_LUA} != "no"
+SUBDIR+=		lua
+.endif
+
 # Pick the machine-dependent subdir based on the target architecture.
 ADIR=			${MACHINE:S/powerpc64/powerpc/}
 .if exists(${.CURDIR}/${ADIR}/.)

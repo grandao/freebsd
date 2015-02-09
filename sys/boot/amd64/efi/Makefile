@@ -45,6 +45,13 @@ CFLAGS+=	-I${.CURDIR}/../../ficl/${MACHINE_CPUARCH}
 LIBFICL=	${.OBJDIR}/../../ficl/libficl.a
 .endif
 
+#Lua
+.if ${MK_LUA} != "no"
+BOOT_LUA=	yes
+CFLAGS+=	-DBOOT_LUA -I${.CURDIR}/../../../lua/src
+LIBLUA=	${.OBJDIR}/../../lua/liblua.a
+.endif
+
 # Include bcache code.
 HAVE_BCACHE=    yes
 
@@ -91,8 +98,8 @@ loader.efi: loader.sym
 
 LIBEFI=		${.OBJDIR}/../../efi/libefi/libefi.a
 
-DPADD=		${LIBFICL} ${LIBEFI} ${LIBSTAND} ${LDSCRIPT}
-LDADD=		${LIBFICL} ${LIBEFI} ${LIBSTAND}
+DPADD=		${LIBFICL} ${LIBLUA} ${LIBEFI} ${LIBSTAND} ${LDSCRIPT}
+LDADD=		${LIBFICL} ${LIBLUA} ${LIBEFI} ${LIBSTAND}
 
 .endif # ${COMPILER_TYPE} != "gcc"
 
