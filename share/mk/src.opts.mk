@@ -87,7 +87,7 @@ __DEFAULT_YES_OPTIONS = \
     FINGER \
     FLOPPY \
     FMTREE \
-    FORTH \
+    LUA \
     FP_LIBC \
     FREEBSD_UPDATE \
     FTP \
@@ -180,6 +180,7 @@ __DEFAULT_NO_OPTIONS = \
     CLANG_EXTRAS \
     EISA \
     FMAKE \
+    FORTH \
     HESIOD \
     LLDB \
     NAND \
