@@ -27,7 +27,7 @@
  */
 
 #ifndef LSTD_H
-#define LSDT_H
+#define LSTD_H
 
 #ifdef BOOT_LUA
 
