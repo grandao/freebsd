@@ -71,6 +71,7 @@ MAN+=	../forth/version.4th.8
 
 .if defined(BOOT_LUA)
 SRCS+=	interp_lua.c
+CFLAGS+=-I${.CURDIR}/../../contrib/lua/src
 .endif
 
 .if defined(BOOT_PROMPT_123)

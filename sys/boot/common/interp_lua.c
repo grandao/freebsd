@@ -37,11 +37,11 @@ __FBSDID("$FreeBSD$");
 
 #define lua_c
 
-#include "../../lua/src/lua.h"
-#include "../../lua/src/ldebug.h"
-#include "../../lua/src/lauxlib.h"
-#include "../../lua/src/lualib.h"
-#include "../lua/lutils.h"
+#include "lua.h"
+#include "ldebug.h"
+#include "lauxlib.h"
+#include "lualib.h"
+#include "lutils.h"
 
 
 struct interp_lua_softc {

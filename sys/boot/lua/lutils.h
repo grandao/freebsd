@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-#include "../../lua/src/lua.h"
+#include "lua.h"
 
 #define lua_create() lua_newstate(lua_realloc, NULL)
 

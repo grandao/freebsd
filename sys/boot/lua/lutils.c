@@ -28,7 +28,7 @@
 #include <sys/cdefs.h>
 __FBSDID("$FreeBSD$");
 
-#include "../../lua/src/lua.h"
+#include "lutils.h"
 #include "../common/interp.h"
 
 int

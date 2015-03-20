@@ -1,6 +1,6 @@
 .include "../Makefile.inc"
 
-LUA_PATH=	../../lua
+LUA_PATH=	../../contrib/lua
 
 SRCS+=	lutils.c
 
@@ -9,6 +9,7 @@ SRCS+=	lutils.c
 SRCS+=	lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c lfunc.c lgc.c llex.c lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c ltm.c lundump.c lvm.c lzio.c lstd.c lauxlib.c lbaselib.c lstrlib.c
 
 CFLAGS+=	-I.
+CFLAGS+=	-I${LUA_PATH}/src
 CFLAGS+=	-DBOOT_LUA -ffreestanding -nostdlib -fno-stack-protector
 
 
