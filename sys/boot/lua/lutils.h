@@ -40,7 +40,7 @@ int ldo_string(lua_State *L, const char *str, size_t size);
 
 int ldo_file(lua_State *L, const char *filename);
 
-void lregister(const char *tname, const char *fname, int (*fptr)(lua_State *));
+void lregister(lua_State *L, const char *tableName, const char *funcName, int (*funcPointer)(lua_State *));
 
 void register_utils(lua_State *L);
 
