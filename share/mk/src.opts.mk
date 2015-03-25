@@ -191,7 +191,7 @@ __DEFAULT_NO_OPTIONS = \
     SHARED_TOOLCHAIN \
     SORT_THREADS \
     SVN \
-
+    LUA
 
 #
 # Default behaviour of some options depends on the architecture.  Unfortunately
