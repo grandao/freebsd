@@ -52,6 +52,8 @@ LIBFICL=	${.OBJDIR}/../../ficl/libficl.a
 
 .if ${MK_LUA} != "no"
 BOOT_LUA=	yes
+CFLAGS+=	-DBOOT_LUA -I${.CURDIR}/../../../contrib/lua
+CFLAGS+=	-I${.CURDIR}/../../liblua
 .if ${MACHINE_CPUARCH} == "amd64"
 LIBLUA=		${.OBJDIR}/../../liblua32/liblua.a
 .else
@@ -136,6 +138,8 @@ FILES+= menu.rc
 .endif
 .endif
 .if defined(BOOT_LUA)
+# 'forth' is included just for loader.conf.
+.PATH: ${.CURDIR}/../../forth ${.CURDIR}/../../lua
 FILES+=	config.lua core.lua drawer.lua password.lua screen.lua
 .if !exists(${DESTDIR}/boot/loader.lua)
 FILES+=	loader.lua
