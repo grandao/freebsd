@@ -49,7 +49,7 @@ void	interact(const char *rc);
 int	include(const char *filename);
 
 /* interp_backslash.c */
-char	*backslash(char *str);
+char	*backslash(const char *str);
 
 /* interp_parse.c */
 int	parse(int *argc, char ***argv, const char *str);

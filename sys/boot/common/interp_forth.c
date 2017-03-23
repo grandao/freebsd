@@ -133,17 +133,6 @@ bf_command(FICL_VM *vm)
 			vmUpdateTib(vm, tail + len);
 		}
 	}
-	DEBUG("cmd '%s'", line);
-
-	command_errmsg = command_errbuf;
-	command_errbuf[0] = 0;
-	if (!parse(&argc, &argv, line)) {
-		result = (cmd)(argc, argv);
-		free(argv);
-	} else {
-		result=BF_PARSE;
-	}
-    }
     DEBUG("cmd '%s'", line);
     
     command_errmsg = command_errbuf;
@@ -266,7 +255,7 @@ bf_command(FICL_VM *vm)
 /*
  * Initialise the Forth interpreter, create all our commands as words.
  */
-void
+static void
 interp_forth_init(void *ctx)
 {
 	struct interp_forth_softc   *softc;
@@ -279,7 +268,7 @@ interp_forth_init(void *ctx)
 	(softc->pInterp == NULL));	/* No Forth context at this stage */
 
     softc->bf_sys = ficlInitSystem(BF_DICTSIZE);
-    softc->bf_vm = ficlNewVM(bf_sys);
+    softc->bf_vm = ficlNewVM(softc->bf_sys);
 
     /* Put all private definitions in a "builtins" vocabulary */
     ficlExec(softc->bf_vm, "vocabulary builtins also builtins definitions");
@@ -302,22 +291,18 @@ interp_forth_init(void *ctx)
     ficlSetEnv(softc->bf_sys, "loader_version", bootprog_rev);
 
     /* try to load and run init file if present */
-    if (rc == NULL)
-	rc = "/boot/boot.4th";
-    if (*rc != '\0') {
-	fd = open(rc, O_RDONLY);
-	if (fd != -1) {
-	    (void)ficlExecFD(softc->bf_vm, fd);
-	    close(fd);
-	}
+	fd = open("/boot/boot.4th", O_RDONLY);
+    if (fd != -1) {
+	(void)ficlExecFD(softc->bf_vm, fd);
+	close(fd);
     }
 }
 
 /*
  * Feed a line of user input to the Forth interpreter
  */
-int
-interp_forth_run(void *ctx, const char *line)
+static int
+interp_forth_run(void *ctx, char *line)
 {
     struct interp_forth_softc *softc;
     int		result;
@@ -356,7 +341,7 @@ interp_forth_run(void *ctx, const char *line)
     return (result);
 }
 
-int
+static int
 interp_forth_incl(void *ctx, const char *filename)
 {
 	struct interp_forth_softc *softc;

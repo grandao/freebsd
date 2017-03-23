@@ -38,15 +38,15 @@ struct interp_simple_softc {
 	int	dummy;
 };
 
-void
+static void
 interp_simple_init(void *ctx)
 {
 
 	(void)ctx; /* Silent the compiler */
 }
 
-int
-interp_simple_run(void *ctx, const char *input)
+static int
+interp_simple_run(void *ctx, char *input)
 {
 	struct interp_simple_softc *softc;
 	int argc;
@@ -65,7 +65,7 @@ interp_simple_run(void *ctx, const char *input)
 	return 0;
 }
 
-int
+static int
 interp_simple_incl(void *ctx, const char *filename)
 {
 	struct includeline	*script, *se, *sp;

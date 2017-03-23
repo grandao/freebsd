@@ -28,7 +28,7 @@
  */
 
 typedef void	interp_init_t(void *ctx);
-typedef int	interp_run_t(void *ctx, const char *input);
+typedef int	interp_run_t(void *ctx, char *input);
 typedef int	interp_incl_t(void *ctx, const char *filename);
 typedef int	interp_load_def_t(void *ctx);		// load default configuration files
 

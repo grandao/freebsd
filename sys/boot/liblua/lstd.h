@@ -68,8 +68,6 @@ int getc(FILE * stream);
 #define BUFSIZ 512
 #endif
 
-#define getlocaledecpoint() ('.')
-
 #define strcoll strcmp
 
 int abs(int v);

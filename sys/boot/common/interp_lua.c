@@ -58,7 +58,7 @@ static struct interp_lua_softc lua_softc;
 #endif
 
 
-void
+static void
 interp_lua_init(void *ctx)
 {
 	lua_State *luap;
@@ -82,8 +82,8 @@ interp_lua_init(void *ctx)
 	lua_pop(luap, 1);
 }
 
-int
-interp_lua_run(void *data, const char *line)
+static int
+interp_lua_run(void *data, char *line)
 {
 	lua_State *luap;
 	struct interp_lua_softc	*softc;
@@ -113,7 +113,7 @@ interp_lua_run(void *data, const char *line)
 	return (0);
 }
 
-int
+static int
 interp_lua_incl(void *ctx, const char *filename)
 {
 	struct interp_lua_softc *softc;
@@ -128,7 +128,7 @@ interp_lua_incl(void *ctx, const char *filename)
  * To avoid conflicts, this lua interpreter uses loader.lua instead of
  * loader.rc/boot.conf to load its configurations.
  */
-int
+static int
 interp_lua_load_config(void *ctx)
 {
 	LDBG("loading config");
